@@ -49,6 +49,7 @@ const {
     menu1,
     menu2,
     menu3,
+    menu4,
     info,
     donate,
     alay,
