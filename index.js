@@ -1,4 +1,4 @@
-/*
+﻿/*
 * JANGAN UBAH-UBAH INFO!!!
 * "JANGAN MODAL NAMA DOANG BRO!!!"
 * SCRIPT BY ARIS187 ID
@@ -18,12 +18,12 @@ const arrayBulan = ['Januari', 'Februari', 'Maret', 'April', 'Mei', 'Juni', 'Jul
 const bulan = arrayBulan[moment().format('MM') - 1]
 
 const config = {
-    A187: '📍D4RKBOT📍',
+    A187: '📍MAIKON📍',
     instagram: 'OFF',
-    nomer: 'wa.me/21997123716',
+    nomer: 'https://bit.ly/2KgGUDv',
     aktif: '24 JAM',
-    youtube: 'https://youtube.com/channel/UCRaC-6JyCW_iqbW1DbuXVxQ',
-    whatsapp: 'https://chat.whatsapp.com/KTlC0MXi3WJChdQeps5flt',
+    Mods: 'https://linktr.ee/Gb_Yo_Yx_FmWhatsapp',
+    Whatsapp: 'https://bit.ly/36K39Mt',
     tanggal: `TANGGAL: ${moment().format('DD')} ${bulan} ${moment().format('YYYY')}`,
     waktu: time
 }
@@ -51,6 +51,7 @@ const {
     menu3,
     info,
     donate,
+    gtts,
     alay,
     artinama,
     corona,
