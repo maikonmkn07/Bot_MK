@@ -51,7 +51,6 @@ const {
     menu3,
     info,
     donate,
-    gtts,
     alay,
     artinama,
     corona,
