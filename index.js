@@ -46,7 +46,7 @@ const
 
 const {
     help,
-    bot
+    bot,
     menu1,
     menu2,
     menu3,
