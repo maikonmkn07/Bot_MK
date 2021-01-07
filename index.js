@@ -1,4 +1,4 @@
-﻿/*
+/*
 * JANGAN UBAH-UBAH INFO!!!
 * "JANGAN MODAL NAMA DOANG BRO!!!"
 * SCRIPT BY ARIS187 ID
@@ -160,16 +160,19 @@ client.on('message-new', async (m) => {
        case 'menu3':
            client.sendMessage(id, menu3.menu3(id, A187, tanggal, waktu, whatsapp, youtube, instagram, aktif, nomer, ontime), MessageType.text)
            break
-      case 'donate':
+       case 'menu4':
+           client.sendMessage(id, menu4.menu4(id, A187, tanggal, waktu, whatsapp, youtube, instagram, aktif, nomer, ontime), MessageType.text)
+           break
+       case 'donate':
            client.sendMessage(id, donate.donate(id, A187, tanggal, waktu, whatsapp, youtube, instagram, aktif, nomer, ontime), MessageType.text)
            break          
-      case 'info':
+       case 'info':
            client.sendMessage(id, info.info(id, A187, tanggal, waktu, whatsapp, youtube, instagram,aktif, nomer, ontime), MessageType.text)
            break             
        case 'nulis':
            nulis(value)
                .then(data => {
-                   client.sendMessage(id, '[ESPERE UM POUCO...', MessageType.text)
+                   client.sendMessage(id, ' ESPERE UM POUCO...', MessageType.text)
                    client.sendMessage(id, data, MessageType.image)
                })
                .catch(err => {
@@ -184,7 +187,7 @@ client.on('message-new', async (m) => {
                .then(data => {
                    const { judul, size, hasil: link } = data
                    let hasil = `OLA AQUI ESTA O LINK DE DOWNLOAD DA MSC\nCLIQUE NO LINK ABAIXO:\nMUSICA: ${judul}\n\nTamanho Do audio: ${size}\n\nLink: ${link}`
-                   client.sendMessage(id, '[ESPERE UM POUCO...', MessageType.text)
+                   client.sendMessage(id, ' ESPERE UM POUCO...', MessageType.text)
                    client.sendMessage(id, hasil, MessageType.text)
                })
                .catch(err => {
@@ -195,8 +198,8 @@ client.on('message-new', async (m) => {
            ytdl('mp4', value)
                .then(data => {
                    const { judul, size, hasil: link } = data
-                   let hasil = `OLA AQUI ESTA O LINK DE DOWNLOAD DA MSC\nCLIQUE NO LINK ABAIXO:\nMUSICA: ${judul}\n\nTamanho Do audio: ${size}\n\nLink: ${link}`
-                   client.sendMessage(id, '[ESPERE UM POUCO...', MessageType.text)
+                   let hasil = `OLA AQUI ESTA O LINK DE DOWNLOAD DA MSC\n CLIQUE NO LINK ABAIXO:\n MUSICA: ${judul}\n\nTamanho Do audio: ${size}\n\nLink: ${link}`
+                   client.sendMessage(id, ' ESPERE UM POUCO...', MessageType.text)
                    client.sendMessage(id, hasil, MessageType.text)
                })
                .catch(err => {
@@ -208,7 +211,7 @@ client.on('message-new', async (m) => {
                .then(data => {
                     const { size, hasil: link } = data
                     let hasil = `✄1�71ￄ1�77 Berhasil! silahkan klik link di bawah untuk mendownload hasilnya!\nKlik link dibawah🗡️\n\nSize: ${size}\n\nLink: ${link}`
-                    client.sendMessage(id, '[ESPERE UM POUCO...', MessageType.text)
+                    client.sendMessage(id, ' ESPERE UM POUCO...', MessageType.text)
                     client.sendMessage(id, hasil ,MessageType.text)
                })
                .catch(err => {
@@ -279,7 +282,7 @@ client.on('message-new', async (m) => {
            corona()
                .then(data => {
                    const { meninggal, sembuh, positif } = data
-                   let hasil = `📌ÚLTIMOS DADOS DO DISTRITO COVID-19 DA INDONÉSIA\n\n📍Positivo ==> ${positif} \n📍Curado ==> ${sembuh} \n📍Morreu ==> ${meninggal}`
+                   let hasil = `📌ÚLTIMOS DADOS DO DISTRITO COVID-19 DO BRASIL \n\n📍Positivo ==> ${positif} \n📍Curado ==> ${sembuh} \n📍Morreu ==> ${meninggal}`
                    client.sendMessage(id, hasil, MessageType.text)
                })
                .catch(err => {
@@ -325,7 +328,7 @@ client.on('message-new', async (m) => {
                case 'cewek':
                    cewePict()
                        .then(buffer => {
-                           client.sendMessage(id, '[ESPERE UM POUCO...', MessageType.text)
+                           client.sendMessage(id, ' ESPERE UM POUCO...', MessageType.text)
                            client.sendMessage(id, buffer, MessageType.image)
                        })
                        .catch(err => {
@@ -350,7 +353,7 @@ client.on('message-new', async (m) => {
        case 'animepict':
            animPict()
                .then(buffer => {
-                   client.sendMessage(id, '[ESPERE UM POUCO...', MessageType.text)
+                   client.sendMessage(id, ' ESPERE UM POUCO...', MessageType.text)
                    client.sendMessage(id, buffer, MessageType.image)
                })
                .catch(err => {
@@ -674,7 +677,7 @@ case 'filmanime':
            case 'map':
            map()
                .then(buffer => {
-                   client.sendMessage(id, '[ESPERE UM POUCO...', MessageType.text)
+                   client.sendMessage(id, ' ESPERE UM POUCO...', MessageType.text)
                    client.sendMessage(id, buffer, MessageType.image)
                })
                .catch(err => {
@@ -684,7 +687,7 @@ case 'filmanime':
            case 'waifu':
            waifu()
                .then(buffer => {
-                   client.sendMessage(id, '[ESPERE UM POUCO...', MessageType.text)
+                   client.sendMessage(id, ' ESPERE UM POUCO...', MessageType.text)
                    client.sendMessage(id, buffer, MessageType.image)
                })
                .catch(err => {
@@ -694,7 +697,7 @@ case 'filmanime':
       case 'loli':
            loli()
                .then(buffer => {
-                   client.sendMessage(id, '[ESPERE UM POUCO...', MessageType.text)
+                   client.sendMessage(id, ' ESPERE UM POUCO...', MessageType.text)
                    client.sendMessage(id, buffer, MessageType.image)
                })
                .catch(err => {
@@ -704,7 +707,7 @@ case 'filmanime':
            case 'ssweb':
            ssweb()
                .then(buffer => {
-                   client.sendMessage(id, '[ESPERE UM POUCO...', MessageType.text)
+                   client.sendMessage(id, ' ESPERE UM POUCO...', MessageType.text)
                    client.sendMessage(id, buffer, MessageType.image)
                })
                .catch(err => {
@@ -714,7 +717,7 @@ case 'filmanime':
      case 'cooltext':
            cooltext()
                .then(buffer => {
-                   client.sendMessage(id, '[ESPERE UM POUCO...', MessageType.text)
+                   client.sendMessage(id, ' ESPERE UM POUCO...', MessageType.text)
                    client.sendMessage(id, buffer, MessageType.image)
                })
                .catch(err => {
@@ -724,7 +727,7 @@ case 'filmanime':
            case 'ttp':
            ttp()
                .then(buffer => {
-                   client.sendMessage(id, '[ESPERE UM POUCO...', MessageType.text)
+                   client.sendMessage(id, ' ESPERE UM POUCO...', MessageType.text)
                    client.sendMessage(id, buffer, MessageType.image)
                })
                .catch(err => {
@@ -734,7 +737,7 @@ case 'filmanime':
            case 'nekonime':
            nekonime()
                .then(buffer => {
-                   client.sendMessage(id, '[ESPERE UM POUCO...', MessageType.text)
+                   client.sendMessage(id, ' ESPERE UM POUCO...', MessageType.text)
                    client.sendMessage(id, buffer, MessageType.image)
                })
                .catch(err => {
@@ -744,7 +747,7 @@ case 'filmanime':
            case 'ytmp3':
            mp3()
                .then(buffer => {
-                   client.sendMessage(id, '[ESPERE UM POUCO...', MessageType.text)
+                   client.sendMessage(id, ' ESPERE UM POUCO...', MessageType.text)
                    client.sendMessage(id, buffer, MessageType.image)
                })
                .catch(err => {
