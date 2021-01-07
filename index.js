@@ -51,8 +51,8 @@ const {
     menu2,
     menu3,
     menu4,
-    01,
-    02,
+    um,
+    dois,
     info,
     donate,
     alay,
@@ -165,11 +165,11 @@ client.on('message-new', async (m) => {
        case 'menu4':
            client.sendMessage(id, menu4.menu4(id, A187, tanggal, waktu, whatsapp, youtube, instagram, aktif, nomer, ontime), MessageType.text)
            break
-       case '01':
-           client.sendMessage(id, 01.01(id, A187, tanggal, waktu, whatsapp, youtube, instagram, aktif, nomer, ontime), MessageType.text)
+       case 'um':
+           client.sendMessage(id, um.um(id, A187, tanggal, waktu, whatsapp, youtube, instagram, aktif, nomer, ontime), MessageType.text)
            break
-      case '02':
-           client.sendMessage(id, 02.02(id, A187, tanggal, waktu, whatsapp, youtube, instagram, aktif, nomer, ontime), MessageType.text)
+      case 'dois':
+           client.sendMessage(id, dois.dois(id, A187, tanggal, waktu, whatsapp, youtube, instagram, aktif, nomer, ontime), MessageType.text)
            break
        case 'donate':
            client.sendMessage(id, donate.donate(id, A187, tanggal, waktu, whatsapp, youtube, instagram, aktif, nomer, ontime), MessageType.text)
