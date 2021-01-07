@@ -1,12 +1,12 @@
 /*
-* NÃO ALTERE A INFORMAÇÃO !!!
-* NÃO MAIÚSCULA DOANG BRO !!!"
-* SCRIPT POR ARIS187 ID
-* NÃO MAIÚSCULAS DE BOSQ DOANG
-* SCRIPT É BOSQ com PREÇO DE FATURA
-* NÃO ALTERE A INFORMAÇÃO !!!
+* JANGAN UBAH-UBAH INFO!!!
+* "JANGAN MODAL NAMA DOANG BRO!!!"
+* SCRIPT BY ARIS187 ID
+* JANGAN MODAL NAMA DOANG BOSQ
+* HARGAILAH YG MEMBUAT SCRIPT INI BOSQ
+* JANGAN UBAH-UBAH INFO!!!
 * ARIS187 ID
-* MUDE, MAS EXCETO AS INFORMAÇÕES !!!
+* BOLEH UBAH TAPI KECUALI INFO!!!
 */
 const qrcode = require("qrcode-terminal")
 const moment = require("moment-timezone")
@@ -46,10 +46,13 @@ const
 
 const {
     help,
+    bot
     menu1,
     menu2,
     menu3,
     menu4,
+    01,
+    02,
     info,
     donate,
     alay,
@@ -149,8 +152,7 @@ client.on('message-new', async (m) => {
 
    switch (prefix) {
        case 'help':
-           client.sendMessage(id, help.help(id, A187, tanggal, waktu, whatsapp, youtube, instagram, aktif, nomer, ontime), MessageType.text)
-           break
+       case 'bot':
        case 'menu1':
            client.sendMessage(id, menu1.menu1(id, A187, tanggal, waktu, whatsapp, youtube, instagram, aktif, nomer, ontime), MessageType.text)
            break
@@ -162,6 +164,12 @@ client.on('message-new', async (m) => {
            break
        case 'menu4':
            client.sendMessage(id, menu4.menu4(id, A187, tanggal, waktu, whatsapp, youtube, instagram, aktif, nomer, ontime), MessageType.text)
+           break
+       case '01':
+           client.sendMessage(id, 01.01(id, A187, tanggal, waktu, whatsapp, youtube, instagram, aktif, nomer, ontime), MessageType.text)
+           break
+      case '02':
+           client.sendMessage(id, 02.02(id, A187, tanggal, waktu, whatsapp, youtube, instagram, aktif, nomer, ontime), MessageType.text)
            break
        case 'donate':
            client.sendMessage(id, donate.donate(id, A187, tanggal, waktu, whatsapp, youtube, instagram, aktif, nomer, ontime), MessageType.text)
