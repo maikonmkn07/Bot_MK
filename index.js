@@ -110,6 +110,7 @@ const {
     indohot,
     loli,
     ttp,
+    gtts,
     map,
     waifu
 } = require('./lib')
@@ -830,24 +831,24 @@ case 'filmanime':
             }
             break  
             case 'gtts':
-					if (args.length < 1) return client.sendMessage(from, 'Kode bahasanya mana om?', text, {quoted: mek})
+					if (args.length < 1) return client.sendMessage(from, 'CADE A PRR DO CODIGO DO IDIOMA???', text, {quoted: mek})
 					const gtts = require('./lib/gtts')(args[0])
-					if (args.length < 2) return client.sendMessage(from, 'Textnya mana om', text, {quoted: mek})
+					if (args.length < 2) return client.sendMessage(from, 'CADE A PRR DO TEXTO', text, {quoted: mek})
 					dtt = body.slice(9)
 					ranm = getRandom('.mp3')
 					rano = getRandom('.ogg')
 					dtt.length > 600
-					? reply('Textnya kebanyakan om')
+					? reply('QUER ESCREVER A BIBLIA KLR??')
 					: gtts.save(ranm, dtt, function() {
 						exec(`ffmpeg -i ${ranm} -ar 48000 -vn -c:a libopus ${rano}`, (err) => {
 							fs.unlinkSync(ranm)
 							buff = fs.readFileSync(rano)
-							if (err) return reply('Gagal om:(')
+							if (err) return reply('Falhou:(')
 							client.sendMessage(from, buff, audio, {quoted: mek, ptt:true})
 							fs.unlinkSync(rano)
 						})
 					})
-					break   
+				break
       case 'stickergif':
             if (isMedia) {
                 if (mimetype === 'video/mp4' && message.duration < 10 || mimetype === 'image/gif' && message.duration < 10) {
