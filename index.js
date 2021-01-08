@@ -47,12 +47,21 @@ const
 const {
     help,
     bot,
+    menu,
     menu1,
     menu2,
     menu3,
     menu4,
-    um,
-    dois,
+    m01,
+    m02,
+    m03,
+    m04,
+    m05,
+    m06,
+    m07,
+    m08,
+    m09,
+    m10,
     info,
     donate,
     alay,
@@ -153,6 +162,7 @@ client.on('message-new', async (m) => {
    switch (prefix) {
        case 'help':
        case 'bot':
+       case 'menu':
        case 'menu1':
            client.sendMessage(id, menu1.menu1(id, A187, tanggal, waktu, whatsapp, youtube, instagram, aktif, nomer, ontime), MessageType.text)
            break
@@ -165,11 +175,35 @@ client.on('message-new', async (m) => {
        case 'menu4':
            client.sendMessage(id, menu4.menu4(id, A187, tanggal, waktu, whatsapp, youtube, instagram, aktif, nomer, ontime), MessageType.text)
            break
-       case 'um':
-           client.sendMessage(id, um.um(id, A187, tanggal, waktu, whatsapp, youtube, instagram, aktif, nomer, ontime), MessageType.text)
+       case 'm01':
+           client.sendMessage(id, m01.m01(id, A187, tanggal, waktu, whatsapp, youtube, instagram, aktif, nomer, ontime), MessageType.text)
            break
-      case 'dois':
-           client.sendMessage(id, dois.dois(id, A187, tanggal, waktu, whatsapp, youtube, instagram, aktif, nomer, ontime), MessageType.text)
+       case 'm02':
+           client.sendMessage(id, m02.m02(id, A187, tanggal, waktu, whatsapp, youtube, instagram, aktif, nomer, ontime), MessageType.text)
+           break
+       case 'm03':
+           client.sendMessage(id, m03.m03(id, A187, tanggal, waktu, whatsapp, youtube, instagram, aktif, nomer, ontime), MessageType.text)
+           break
+       case 'm04':
+           client.sendMessage(id, m04.m04(id, A187, tanggal, waktu, whatsapp, youtube, instagram, aktif, nomer, ontime), MessageType.text)
+           break
+       case 'm05':
+           client.sendMessage(id, m05.m05(id, A187, tanggal, waktu, whatsapp, youtube, instagram, aktif, nomer, ontime), MessageType.text)
+           break
+       case 'm06':
+           client.sendMessage(id, m06.m06(id, A187, tanggal, waktu, whatsapp, youtube, instagram, aktif, nomer, ontime), MessageType.text)
+           break
+       case 'm07':
+           client.sendMessage(id, m07.m07(id, A187, tanggal, waktu, whatsapp, youtube, instagram, aktif, nomer, ontime), MessageType.text)
+           break
+       case 'm08':
+           client.sendMessage(id, m08.m08(id, A187, tanggal, waktu, whatsapp, youtube, instagram, aktif, nomer, ontime), MessageType.text)
+           break
+       case 'm09':
+           client.sendMessage(id, m09.m09(id, A187, tanggal, waktu, whatsapp, youtube, instagram, aktif, nomer, ontime), MessageType.text)
+           break
+       case 'm10':
+           client.sendMessage(id, m10.m10(id, A187, tanggal, waktu, whatsapp, youtube, instagram, aktif, nomer, ontime), MessageType.text)
            break
        case 'donate':
            client.sendMessage(id, donate.donate(id, A187, tanggal, waktu, whatsapp, youtube, instagram, aktif, nomer, ontime), MessageType.text)
