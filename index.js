@@ -13,7 +13,7 @@ const moment = require("moment-timezone")
 const fs = require("fs")
 
 const time = moment().tz('Asia/Jakarta').format("HH:mm:ss")
-const arrayBulan = ['Janeiro', 'Fvereiro', 'Março', 'Abril', 'Maio', 'Junho', 'Julho', 'Agosto', 'Setembro', 'Outubro', 'Novembro', 'Dezembro']
+const arrayBulan = ['Janeiro', 'Fevereiro', 'Março', 'Abril', 'Maio', 'Junho', 'Julho', 'Agosto', 'Setembro', 'Outubro', 'Novembro', 'Dezembro']
 
 const bulan = arrayBulan[moment().format('MM') - 1]
 
@@ -168,6 +168,140 @@ client.on('message-new', async (m) => {
    const prefix = messageType === 'imageMessage' ? imageMessage.caption.split(' ')[0].split(re)[1] : text.split(' ')[0].split(re)[1] // multiple prefix
 
    console.log(`[ ${time} ] => Nomor: [ ${id.split("@s.whatsapp.net")[0]} ] => ${text}`);
+   
+   
+function kyun(seconds){
+  function pad(s){
+    return (s < 10 ? '0' : '') + s;
+  }
+  var hours = Math.floor(seconds / (60*60));
+  var minutes = Math.floor(seconds % (60*60) / 60);
+  var seconds = Math.floor(seconds % 60);
+
+  //return pad(hours) + ':' + pad(minutes) + ':' + pad(seconds)
+  return `${pad(hours)} Hora ${pad(minutes)} Minuto ${pad(seconds)} Segundo`
+}
+
+async function starts() {
+	const client = new WAConnection()
+	client.logger.level = 'warn'
+	console.log(banner.string)
+	client.on('qr', () => {
+		console.log(color('[','white'), color('!','red'), color(']','white'), color(' Scan the qr code above'))
+	})
+
+	fs.existsSync('./BarBar.json') && client.loadAuthInfo('./BarBar.json')
+	client.on('connecting', () => {
+		start('2', 'Connecting...')
+	})
+	client.on('open', () => {
+		success('2', 'Connected')
+	})
+	await client.connect({timeoutMs: 30*1000})
+        fs.writeFileSync('./BarBar.json', JSON.stringify(client.base64EncodedAuthInfo(), null, '\t'))
+
+	client.on('group-participants-update', async (anu) => {
+		if (!welkom.includes(anu.jid)) return
+		try {
+			const mdata = await client.groupMetadata(anu.jid)
+			console.log(anu)
+			if (anu.action == 'add') {
+				num = anu.participants[0]
+				try {
+					ppimg = await client.getProfilePicture(`${anu.participants[0].split('@')[0]}@c.us`)
+				} catch {
+					ppimg = 'https://i0.wp.com/www.gambarunik.id/wp-content/uploads/2019/06/Top-Gambar-Foto-Profil-Kosong-Lucu-Tergokil-.jpg'
+				}
+				teks = `Olá @${num.split('@')[0]}\nBem vindo ao grupo *${mdata.subject}*\nPor favor não seja um ghost❤️`
+				let buff = await getBuffer(ppimg)
+				client.sendMessage(mdata.id, buff, MessageType.image, {caption: teks, contextInfo: {"mentionedJid": [num]}})
+			} else if (anu.action == 'remove') {
+				num = anu.participants[0]
+				try {
+					ppimg = await client.getProfilePicture(`${num.split('@')[0]}@c.us`)
+				} catch {
+					ppimg = 'https://i0.wp.com/www.gambarunik.id/wp-content/uploads/2019/06/Top-Gambar-Foto-Profil-Kosong-Lucu-Tergokil-.jpg'
+				}
+				teks = `Tchau @${num.split('@')[0]} ja foi tarde 😂👋`
+				let buff = await getBuffer(ppimg)
+				client.sendMessage(mdata.id, buff, MessageType.image, {caption: teks, contextInfo: {"mentionedJid": [num]}})
+			}
+		} catch (e) {
+			console.log('Error : %s', color(e, 'red'))
+		}
+	})
+
+	client.on('CB:Blocklist', json => {
+            if (blocked.length > 2) return
+	    for (let i of json[1].blocklist) {
+	    	blocked.push(i.replace('c.us','s.whatsapp.net'))
+	    }
+	})
+
+	client.on('chat-update', async (mek) => {
+		try {
+                        if (!mek.hasNewMessage) return
+                        mek = JSON.parse(JSON.stringify(mek)).messages[0]
+			if (!mek.message) return
+			if (mek.key && mek.key.remoteJid == 'status@broadcast') return
+			if (mek.key.fromMe) return
+			global.prefix
+			global.blocked
+			const content = JSON.stringify(mek.message)
+			const from = mek.key.remoteJid
+			const type = Object.keys(mek.message)[0]
+			const apiKey = 'Your-Api-Key'
+			const { text, extendedText, contact, location, liveLocation, image, video, sticker, document, audio, product } = MessageType
+			const time = moment.tz('Asia/Jakarta').format('DD/MM HH:mm:ss')
+			body = (type === 'conversation' && mek.message.conversation.startsWith(prefix)) ? mek.message.conversation : (type == 'imageMessage') && mek.message.imageMessage.caption.startsWith(prefix) ? mek.message.imageMessage.caption : (type == 'videoMessage') && mek.message.videoMessage.caption.startsWith(prefix) ? mek.message.videoMessage.caption : (type == 'extendedTextMessage') && mek.message.extendedTextMessage.text.startsWith(prefix) ? mek.message.extendedTextMessage.text : ''
+			budy = (type === 'conversation') ? mek.message.conversation : (type === 'extendedTextMessage') ? mek.message.extendedTextMessage.text : ''
+			const command = body.slice(1).trim().split(/ +/).shift().toLowerCase()
+			const args = body.trim().split(/ +/).slice(1)
+			const isCmd = body.startsWith(prefix)
+
+			mess = {
+				wait: '⌛ BOTMK convertendo, aguarde um pouco... ⌛',
+				success: '✔️ Deu certo, ufa kk ✔️',
+				error: {
+					stick: '⚠️ Falha, ocorreu um erro ao converter a imagem em figurinha ⚠️',
+					Iv: '❌ Link tidak valid ❌'
+				},
+				only: {
+					group: '❌ Este comando só pode ser usado em grupos! ❌',
+					ownerG: '⚠️ Este comando só pode ser usado pelo dono do bot! 😂',
+					ownerB: '❌ Este comando só pode ser usado pelo proprietário do bot! ❌',
+					admin: '⚠️ Este comando só pode ser usado por admins! 😝',
+					Badmin: '❌ Este comando só pode ser usado quando o bot se torna um administrador! ❌'
+				}
+			}
+
+			const botNumber = client.user.jid
+			const ownerNumber = ["5517991134416@s.whatsapp.net"] // replace this with your number
+			const isGroup = from.endsWith('@g.us')
+			const sender = isGroup ? mek.participant : mek.key.remoteJid
+			const groupMetadata = isGroup ? await client.groupMetadata(from) : ''
+			const groupName = isGroup ? groupMetadata.subject : ''
+			const groupId = isGroup ? groupMetadata.jid : ''
+			const groupMembers = isGroup ? groupMetadata.participants : ''
+			const groupAdmins = isGroup ? getGroupAdmins(groupMembers) : ''
+			const isBotGroupAdmins = groupAdmins.includes(botNumber) || false
+			const isGroupAdmins = groupAdmins.includes(sender) || false
+			const isWelkom = isGroup ? welkom.includes(from) : false
+			const isNsfw = isGroup ? nsfw.includes(from) : true
+			const isSimi = isGroup ? samih.includes(from) : false
+			const isOwner = ownerNumber.includes(sender)
+			const isUrl = (url) => {
+			    return url.match(new RegExp(/https?:\/\/(www\.)?[-a-zA-Z0-9@:%._+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b([-a-zA-Z0-9()@:%_+.~#?&/=]*)/, 'gi'))
+			}
+			const reply = (teks) => {
+				client.sendMessage(from, teks, text, {quoted:mek})
+			}
+			const sendMess = (hehe, teks) => {
+				client.sendMessage(hehe, teks, text)
+			}
+			const mentions = (teks, memberr, id) => {
+				(id == null || id == undefined || id == false) ? client.sendMessage(from, teks.trim(), extendedText, {contextInfo: {"mentionedJid": memberr}}) : client.sendMessage(from, teks.trim(), extendedText, {quoted: mek, contextInfo: {"mentionedJid": memberr}})
+			}
 
    switch (prefix) {
        case 'help':
