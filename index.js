@@ -13,7 +13,7 @@ const moment = require("moment-timezone")
 const fs = require("fs")
 
 const time = moment().tz('Asia/Jakarta').format("HH:mm:ss")
-const arrayBulan = ['Januari', 'Februari', 'Maret', 'April', 'Mei', 'Juni', 'Juli', 'Agustus', 'September', 'Oktober', 'November', 'Desember']
+const arrayBulan = ['Janeiro', 'Fevereiro', 'Março', 'Abril', 'Maio', 'Junho', 'Julho', 'Agosto', 'Setembro', 'Outubro', 'Novembro', 'Dezembro']
 
 const bulan = arrayBulan[moment().format('MM') - 1]
 
@@ -47,12 +47,30 @@ const
 const {
     help,
     bot,
+    menu,
     menu1,
     menu2,
     menu3,
     menu4,
-    um,
-    dois,
+    m01,
+    m02,
+    m03,
+    m04,
+    m05,
+    m06,
+    m07,
+    m08,
+    m09,
+    m10,
+    m11,
+    m12,
+    m13,
+    m14,
+    m15,
+    m16,
+    m17,
+    m18,
+    m19,
     info,
     donate,
     alay,
@@ -101,6 +119,7 @@ const {
     indohot,
     loli,
     ttp,
+    gtts,
     map,
     waifu
 } = require('./lib')
@@ -134,6 +153,80 @@ client.on('message-status-update', json => {
    console.log(`[ ${time} ] => bot by ig:@_sadboy.ig`)
 })
 
+client.on('group-participants-update', async (anu) => {
+		if (!welkom.includes(anu.jid)) return
+		try {
+			const mdata = await client.groupMetadata(anu.jid)
+			console.log(anu)
+			if (anu.action == 'add') {
+				num = anu.participants[0]
+				try {
+					ppimg = await client.getProfilePicture(`${anu.participants[0].split('@')[0]}@c.us`)
+				} catch {
+					ppimg = 'https://i0.wp.com/www.gambarunik.id/wp-content/uploads/2019/06/Top-Gambar-Foto-Profil-Kosong-Lucu-Tergokil-.jpg'
+				}
+				teks = `🔰 Olá @${num.split('@')[0]}\n*Bem vindo ao grupo!* *${mdata.subject}*\nO grupo possui *BOT*.Por favor não seja um Fantasma 👻
+				
+🚫 Proibido pornografia.
+
+🚫 Proibido anúncios Fakes.
+
+🚫 Proibido desrespeitar participante do grupo.️`
+
+				let buff = await getBuffer(ppimg)
+				client.sendMessage(mdata.id, buff, MessageType.image, {caption: teks, contextInfo: {"mentionedJid": [num]}})
+			} else if (anu.action == 'remove') {
+				num = anu.participants[0]
+				try {
+					ppimg = await client.getProfilePicture(`${num.split('@')[0]}@c.us`)
+				} catch {
+					ppimg = 'https://i0.wp.com/www.gambarunik.id/wp-content/uploads/2019/06/Top-Gambar-Foto-Profil-Kosong-Lucu-Tergokil-.jpg'
+				}
+				teks = `Saiu porque quiz!\n@${num.split('@')[0]}.Tchau! 😂👋`
+				let buff = await getBuffer(ppimg)
+				client.sendMessage(mdata.id, buff, MessageType.image, {caption: teks, contextInfo: {"mentionedJid": [num]}})
+			}
+		} catch (e) {
+			console.log('Error : %s', color(e, 'red'))
+		}
+	})
+	client.on('chat-update', async (mek) => {
+		try {
+                        if (!mek.hasNewMessage) return
+                        mek = JSON.parse(JSON.stringify(mek)).messages[0]
+			if (!mek.message) return
+			if (mek.key && mek.key.remoteJid == 'status@broadcast') return
+			if (mek.key.fromMe) return
+			global.prefix
+			global.blocked
+			const content = JSON.stringify(mek.message)
+			const from = mek.key.remoteJid
+			const type = Object.keys(mek.message)[0]
+			const apiKey = 'Your-Api-Key'
+			const { text, extendedText, contact, location, liveLocation, image, video, sticker, document, audio, product } = MessageType
+			const time = moment.tz('Asia/Jakarta').format('DD/MM HH:mm:ss')
+			body = (type === 'conversation' && mek.message.conversation.startsWith(prefix)) ? mek.message.conversation : (type == 'imageMessage') && mek.message.imageMessage.caption.startsWith(prefix) ? mek.message.imageMessage.caption : (type == 'videoMessage') && mek.message.videoMessage.caption.startsWith(prefix) ? mek.message.videoMessage.caption : (type == 'extendedTextMessage') && mek.message.extendedTextMessage.text.startsWith(prefix) ? mek.message.extendedTextMessage.text : ''
+			budy = (type === 'conversation') ? mek.message.conversation : (type === 'extendedTextMessage') ? mek.message.extendedTextMessage.text : ''
+			const command = body.slice(1).trim().split(/ +/).shift().toLowerCase()
+			const args = body.trim().split(/ +/).slice(1)
+			const isCmd = body.startsWith(prefix)
+
+			mess = {
+				wait: '⌛ Bot Mk Carregando... ⌛',
+				success: '✔️ Deu certo, ufa kk ✔️',
+				error: {
+					stick: '⚠️ Falha, ocorreu um erro ao converter a imagem em figurinha ⚠️',
+					Iv: '❌ Link inválido ❌'
+				},
+				only: {
+					group: '❌ Este comando só pode ser usado em grupos! ❌',
+					ownerG: '⚠️ Este comando só pode ser usado pelo dono do bot! 😂',
+					ownerB: '❌ Este comando só pode ser usado pelo proprietário do bot! ❌',
+					admin: '⚠️ Este comando só pode ser usado por admins! 😝',
+					Badmin: '❌ Este comando só pode ser usado quando o bot se torna um administrador! ❌'
+				}
+			}
+			
 client.on('message-new', async (m) => {
    const messageContent = m.message
    const text = m.message.conversation
@@ -153,6 +246,7 @@ client.on('message-new', async (m) => {
    switch (prefix) {
        case 'help':
        case 'bot':
+       case 'menu':
        case 'menu1':
            client.sendMessage(id, menu1.menu1(id, A187, tanggal, waktu, whatsapp, youtube, instagram, aktif, nomer, ontime), MessageType.text)
            break
@@ -165,11 +259,62 @@ client.on('message-new', async (m) => {
        case 'menu4':
            client.sendMessage(id, menu4.menu4(id, A187, tanggal, waktu, whatsapp, youtube, instagram, aktif, nomer, ontime), MessageType.text)
            break
-       case 'um':
-           client.sendMessage(id, um.um(id, A187, tanggal, waktu, whatsapp, youtube, instagram, aktif, nomer, ontime), MessageType.text)
+       case 'm01':
+           client.sendMessage(id, m01.m01(id, A187, tanggal, waktu, whatsapp, youtube, instagram, aktif, nomer, ontime), MessageType.text)
            break
-      case 'dois':
-           client.sendMessage(id, dois.dois(id, A187, tanggal, waktu, whatsapp, youtube, instagram, aktif, nomer, ontime), MessageType.text)
+       case 'm02':
+           client.sendMessage(id, m02.m02(id, A187, tanggal, waktu, whatsapp, youtube, instagram, aktif, nomer, ontime), MessageType.text)
+           break
+       case 'm03':
+           client.sendMessage(id, m03.m03(id, A187, tanggal, waktu, whatsapp, youtube, instagram, aktif, nomer, ontime), MessageType.text)
+           break
+       case 'm04':
+           client.sendMessage(id, m04.m04(id, A187, tanggal, waktu, whatsapp, youtube, instagram, aktif, nomer, ontime), MessageType.text)
+           break
+       case 'm05':
+           client.sendMessage(id, m05.m05(id, A187, tanggal, waktu, whatsapp, youtube, instagram, aktif, nomer, ontime), MessageType.text)
+           break
+       case 'm06':
+           client.sendMessage(id, m06.m06(id, A187, tanggal, waktu, whatsapp, youtube, instagram, aktif, nomer, ontime), MessageType.text)
+           break
+       case 'm07':
+           client.sendMessage(id, m07.m07(id, A187, tanggal, waktu, whatsapp, youtube, instagram, aktif, nomer, ontime), MessageType.text)
+           break
+       case 'm08':
+           client.sendMessage(id, m08.m08(id, A187, tanggal, waktu, whatsapp, youtube, instagram, aktif, nomer, ontime), MessageType.text)
+           break
+       case 'm09':
+           client.sendMessage(id, m09.m09(id, A187, tanggal, waktu, whatsapp, youtube, instagram, aktif, nomer, ontime), MessageType.text)
+           break
+       case 'm10':
+           client.sendMessage(id, m10.m10(id, A187, tanggal, waktu, whatsapp, youtube, instagram, aktif, nomer, ontime), MessageType.text)
+           break
+       case 'm11':
+           client.sendMessage(id, m11.m11(id, A187, tanggal, waktu, whatsapp, youtube, instagram, aktif, nomer, ontime), MessageType.text)
+           break
+       case 'm12':
+           client.sendMessage(id, m12.m12(id, A187, tanggal, waktu, whatsapp, youtube, instagram, aktif, nomer, ontime), MessageType.text)
+           break
+       case 'm13':
+           client.sendMessage(id, m13.m13(id, A187, tanggal, waktu, whatsapp, youtube, instagram, aktif, nomer, ontime), MessageType.text)
+           break
+       case 'm14':
+           client.sendMessage(id, m14.m14(id, A187, tanggal, waktu, whatsapp, youtube, instagram, aktif, nomer, ontime), MessageType.text)
+           break
+       case 'm15':
+           client.sendMessage(id, m15.m15(id, A187, tanggal, waktu, whatsapp, youtube, instagram, aktif, nomer, ontime), MessageType.text)
+           break
+       case 'm16':
+           client.sendMessage(id, m16.m16(id, A187, tanggal, waktu, whatsapp, youtube, instagram, aktif, nomer, ontime), MessageType.text)
+           break
+       case 'm17':
+           client.sendMessage(id, m17.m17(id, A187, tanggal, waktu, whatsapp, youtube, instagram, aktif, nomer, ontime), MessageType.text)
+           break
+       case 'm18':
+           client.sendMessage(id, m18.m18(id, A187, tanggal, waktu, whatsapp, youtube, instagram, aktif, nomer, ontime), MessageType.text)
+           break
+       case 'm19':
+           client.sendMessage(id, m19.m19(id, A187, tanggal, waktu, whatsapp, youtube, instagram, aktif, nomer, ontime), MessageType.text)
            break
        case 'donate':
            client.sendMessage(id, donate.donate(id, A187, tanggal, waktu, whatsapp, youtube, instagram, aktif, nomer, ontime), MessageType.text)
@@ -692,6 +837,16 @@ case 'filmanime':
                    console.log(err)
                })
            break
+           case 'map':
+           map()
+               .then(buffer => {
+                   client.sendMessage(id, ' ESPERE UM POUCO...', MessageType.text)
+                   client.sendMessage(id, buffer, MessageType.image)
+               })
+               .catch(err => {
+                   console.log(err)
+               })
+           break
            case 'waifu':
            waifu()
                .then(buffer => {
@@ -794,7 +949,26 @@ case 'filmanime':
             } else {
                 client.reply(from, 'Masukkan data bahasa : [id] untuk indonesia, [en] untuk inggris, [jp] untuk jepang, dan [ar] untuk arab', id)
             }
-            break     
+            break  
+            case 'gtts':
+					if (args.length < 1) return client.sendMessage(from, 'CADE A PRR DO CODIGO DO IDIOMA???', text, {quoted: mek})
+					const gtts = require('./lib/gtts')(args[0])
+					if (args.length < 2) return client.sendMessage(from, 'CADE A PRR DO TEXTO', text, {quoted: mek})
+					dtt = body.slice(9)
+					ranm = getRandom('.mp3')
+					rano = getRandom('.ogg')
+					dtt.length > 600
+					? reply('QUER ESCREVER A BIBLIA KLR??')
+					: gtts.save(ranm, dtt, function() {
+						exec(`ffmpeg -i ${ranm} -ar 48000 -vn -c:a libopus ${rano}`, (err) => {
+							fs.unlinkSync(ranm)
+							buff = fs.readFileSync(rano)
+							if (err) return reply('Falhou:(')
+							client.sendMessage(from, buff, audio, {quoted: mek, ptt:true})
+							fs.unlinkSync(rano)
+						})
+					})
+				break
       case 'stickergif':
             if (isMedia) {
                 if (mimetype === 'video/mp4' && message.duration < 10 || mimetype === 'image/gif' && message.duration < 10) {
