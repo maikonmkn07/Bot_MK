@@ -152,7 +152,23 @@ client.on('message-status-update', json => {
    const participant = json.participant ? ' (' + json.participant + ')' : ''
    console.log(`[ ${time} ] => bot by ig:@_sadboy.ig`)
 })
+			
+client.on('message-new', async (m) => {
+   const messageContent = m.message
+   const text = m.message.conversation
+   const messageType = Object.keys(messageContent)[0]
 
+   const re = /[\#\!\@\/\?\%\$\.]/
+
+   const value = text.split(' ').splice(1).join(' ')
+
+   let id = m.key.remoteJid
+   let imageMessage = m.message.imageMessage
+
+   const prefix = messageType === 'imageMessage' ? imageMessage.caption.split(' ')[0].split(re)[1] : text.split(' ')[0].split(re)[1] // multiple prefix
+
+   console.log(`[ ${time} ] => Nomor: [ ${id.split("@s.whatsapp.net")[0]} ] => ${text}`);
+   
 client.on('group-participants-update', async (anu) => {
 		if (!welkom.includes(anu.jid)) return
 		try {
@@ -226,22 +242,6 @@ client.on('group-participants-update', async (anu) => {
 					Badmin: '❌ Este comando só pode ser usado quando o bot se torna um administrador! ❌'
 				}
 			}
-			
-client.on('message-new', async (m) => {
-   const messageContent = m.message
-   const text = m.message.conversation
-   const messageType = Object.keys(messageContent)[0]
-
-   const re = /[\#\!\@\/\?\%\$\.]/
-
-   const value = text.split(' ').splice(1).join(' ')
-
-   let id = m.key.remoteJid
-   let imageMessage = m.message.imageMessage
-
-   const prefix = messageType === 'imageMessage' ? imageMessage.caption.split(' ')[0].split(re)[1] : text.split(' ')[0].split(re)[1] // multiple prefix
-
-   console.log(`[ ${time} ] => Nomor: [ ${id.split("@s.whatsapp.net")[0]} ] => ${text}`);
 
    switch (prefix) {
        case 'help':
