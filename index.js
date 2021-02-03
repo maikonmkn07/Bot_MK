@@ -152,7 +152,7 @@ client.on('message-status-update', json => {
    const participant = json.participant ? ' (' + json.participant + ')' : ''
    console.log(`[ ${time} ] => bot by ig:@_sadboy.ig`)
 })
-			
+
 client.on('message-new', async (m) => {
    const messageContent = m.message
    const text = m.message.conversation
@@ -168,80 +168,6 @@ client.on('message-new', async (m) => {
    const prefix = messageType === 'imageMessage' ? imageMessage.caption.split(' ')[0].split(re)[1] : text.split(' ')[0].split(re)[1] // multiple prefix
 
    console.log(`[ ${time} ] => Nomor: [ ${id.split("@s.whatsapp.net")[0]} ] => ${text}`);
-   
-client.on('group-participants-update', async (anu) => {
-		if (!welkom.includes(anu.jid)) return
-		try {
-			const mdata = await client.groupMetadata(anu.jid)
-			console.log(anu)
-			if (anu.action == 'add') {
-				num = anu.participants[0]
-				try {
-					ppimg = await client.getProfilePicture(`${anu.participants[0].split('@')[0]}@c.us`)
-				} catch {
-					ppimg = 'https://i0.wp.com/www.gambarunik.id/wp-content/uploads/2019/06/Top-Gambar-Foto-Profil-Kosong-Lucu-Tergokil-.jpg'
-				}
-				teks = `🔰 Olá @${num.split('@')[0]}\n*Bem vindo ao grupo!* *${mdata.subject}*\nO grupo possui *BOT*.Por favor não seja um Fantasma 👻
-				
-🚫 Proibido pornografia.
-
-🚫 Proibido anúncios Fakes.
-
-🚫 Proibido desrespeitar participante do grupo.️`
-
-				let buff = await getBuffer(ppimg)
-				client.sendMessage(mdata.id, buff, MessageType.image, {caption: teks, contextInfo: {"mentionedJid": [num]}})
-			} else if (anu.action == 'remove') {
-				num = anu.participants[0]
-				try {
-					ppimg = await client.getProfilePicture(`${num.split('@')[0]}@c.us`)
-				} catch {
-					ppimg = 'https://i0.wp.com/www.gambarunik.id/wp-content/uploads/2019/06/Top-Gambar-Foto-Profil-Kosong-Lucu-Tergokil-.jpg'
-				}
-				teks = `Saiu porque quiz!\n@${num.split('@')[0]}.Tchau! 😂👋`
-				let buff = await getBuffer(ppimg)
-				client.sendMessage(mdata.id, buff, MessageType.image, {caption: teks, contextInfo: {"mentionedJid": [num]}})
-			}
-		} catch (e) {
-			console.log('Error : %s', color(e, 'red'))
-		}
-	})
-	client.on('chat-update', async (mek) => {
-		try {
-                        if (!mek.hasNewMessage) return
-                        mek = JSON.parse(JSON.stringify(mek)).messages[0]
-			if (!mek.message) return
-			if (mek.key && mek.key.remoteJid == 'status@broadcast') return
-			if (mek.key.fromMe) return
-			global.prefix
-			global.blocked
-			const content = JSON.stringify(mek.message)
-			const from = mek.key.remoteJid
-			const type = Object.keys(mek.message)[0]
-			const apiKey = 'Your-Api-Key'
-			const { text, extendedText, contact, location, liveLocation, image, video, sticker, document, audio, product } = MessageType
-			const time = moment.tz('Asia/Jakarta').format('DD/MM HH:mm:ss')
-			body = (type === 'conversation' && mek.message.conversation.startsWith(prefix)) ? mek.message.conversation : (type == 'imageMessage') && mek.message.imageMessage.caption.startsWith(prefix) ? mek.message.imageMessage.caption : (type == 'videoMessage') && mek.message.videoMessage.caption.startsWith(prefix) ? mek.message.videoMessage.caption : (type == 'extendedTextMessage') && mek.message.extendedTextMessage.text.startsWith(prefix) ? mek.message.extendedTextMessage.text : ''
-			budy = (type === 'conversation') ? mek.message.conversation : (type === 'extendedTextMessage') ? mek.message.extendedTextMessage.text : ''
-			const command = body.slice(1).trim().split(/ +/).shift().toLowerCase()
-			const args = body.trim().split(/ +/).slice(1)
-			const isCmd = body.startsWith(prefix)
-
-			mess = {
-				wait: '⌛ Bot Mk Carregando... ⌛',
-				success: '✔️ Deu certo, ufa kk ✔️',
-				error: {
-					stick: '⚠️ Falha, ocorreu um erro ao converter a imagem em figurinha ⚠️',
-					Iv: '❌ Link inválido ❌'
-				},
-				only: {
-					group: '❌ Este comando só pode ser usado em grupos! ❌',
-					ownerG: '⚠️ Este comando só pode ser usado pelo dono do bot! 😂',
-					ownerB: '❌ Este comando só pode ser usado pelo proprietário do bot! ❌',
-					admin: '⚠️ Este comando só pode ser usado por admins! 😝',
-					Badmin: '❌ Este comando só pode ser usado quando o bot se torna um administrador! ❌'
-				}
-			}
 
    switch (prefix) {
        case 'help':
@@ -822,16 +748,6 @@ case 'filmanime':
                    const { desc } = data
                    let hasil = `_${desc}_ `
                    client.sendMessage(id, hasil, MessageType.text)
-               })
-               .catch(err => {
-                   console.log(err)
-               })
-           break
-           case 'map':
-           map()
-               .then(buffer => {
-                   client.sendMessage(id, ' ESPERE UM POUCO...', MessageType.text)
-                   client.sendMessage(id, buffer, MessageType.image)
                })
                .catch(err => {
                    console.log(err)
